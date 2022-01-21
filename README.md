@@ -1,33 +1,38 @@
-# LaravelQueueMailSender
+# Laravel Queue Mail Sender
 <li>1-Composer Update </li>
 
 <li>2-php artisan key:generate</li>
 
-<li>3-php artisan migrate (to add tables)</li>
+<li>3-php artisan migrate (to add tables)
+    
+        create_jobs_table
+        create_failed_jobs_table
 
-<li>4-Add your mail information to your env file <br>
-    &nbspMAIL_MAILER=smtp<br>
-    &nbspMAIL_HOST=smtp.gmail.com<br>
-    &nbspMAIL_PORT=587<br>
-    &nbspMAIL_USERNAME=YOUR MAIL ADDRESS<br>
-    &nbspMAIL_PASSWORD="YOUR PASSWORD"<br>
-    &nbspMAIL_ENCRYPTION=tls<br>
-    &nbspMAIL_FROM_ADDRESS=YOUR MAIL ADDRESS<br>
-    &nbspMAIL_FROM_NAME="MAIL NAME"<br></li>
+</li>
+
+<li>4-Add your mail information to your env file 
+    
+       
+        MAIL_MAILER=smtp
+        MAIL_HOST=smtp.gmail.com
+        MAIL_PORT=587
+        MAIL_USERNAME=YOUR MAIL ADDRESS
+        MAIL_PASSWORD="YOUR PASSWORD"
+        MAIL_ENCRYPTION=tls
+        MAIL_FROM_ADDRESS=YOUR MAIL ADDRESS
+        MAIL_FROM_NAME="MAIL NAME
+</li>
 
 <li>5-php artisan serve (to run your project)</li>
 
 <li>6-php artisan queue:work (to run the queue)</li>
 
-<h3> 
-You can change the sending time according to your request. app->Http->Controllers->JobController.php
-      <li>$emailJob = (new SendEmail($details, $id))->delay(Carbon::now()->addSeconds(5));</li>
-</h3>
+<li>You can change the sending time according to your request. [app->Http->Controllers->JobController.php]
+    
+        $emailJob = (new SendEmail($details, $id))->delay(Carbon::now()->addSeconds(5));
+</li>
 
-
-
-<h3> 
-You can set execution time. app->Http->Controllers->JobController <br>
-    <li>php ini_set('max_execution_time', 1000000); </li>
-</h3>
-
+<li>You can set execution time. [app->Http->Controllers->JobController]
+       
+        php ini_set('max_execution_time', 1000000);
+</li>
