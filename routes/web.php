@@ -1,28 +1,15 @@
 <?php
 
-use App\Http\Controllers\JobController;
+use App\Helpers\QueueHelper;
+use App\Http\Controllers\AnnouncementController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/test-email', [JobController::class,'enqueue']);
+Route::get('/', [AnnouncementController::class, 'index'])->name('index');
+Route::post('create', [AnnouncementController::class, 'create'])->name('create');
+Route::get('/fetch', [AnnouncementController::class, 'fetch'])->name('fetch');
+Route::get('/detail', [AnnouncementController::class, 'detail'])->name('detail');
 
-Route::get('/trim',function (){
-    $users = \App\Models\User::where('id','>',299)->get();
-    foreach ($users as $user){
-        $user->email = trim($user->email);
-        $user->save();
-    }
-});
+Route::get('/resend_failed_job', [QueueHelper::class, 'sendFailedJobs'])->name('resend_failed_job');
+Route::get('/mail-count', [QueueHelper::class, 'mailCount'])->name('mail_count');
+
